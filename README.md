@@ -1,19 +1,12 @@
 # POSTRON-Automatic-Engine
 
 ## Dev Log
-
 - Language: Java
 - JDK: jdk-20
 - JRE: JavaSE-20
 - Tool: Eclipse, appium, adb, node.js(latest), npm(latest)
 
 ### Setup Environment (Windows)
-[Video Tutorial](https://www.youtube.com/watch?v=N7vY3cPSo8g)
-
-[Appium-Java-Client Documentation](https://github.com/appium/java-client)
-
-[selenium Documentation](https://github.com/SeleniumHQ/selenium)
-
 - Setup `node.js` & `npm` environment
     - run `node --version` and `npm --version` on cmd to check if they work correctly
 - Setup `ANDROID_HOME` and `JAVA_HOME` Path
@@ -39,5 +32,6 @@
     - [Detailed steps to connect Android device through IP address](https://www.makeuseof.com/use-adb-over-wifi-android/)
         - Get the IP address of your android device
         - run `adb tcpip 5555`
-        - run `adb connect 192.168.1.132`
+        - run `adb connect 192.168.1.132` (the ip address you got from Android device)
+        - now you can disconnect the usb cable and remotely connect to the android device
 - Run appium server before you run the test code 
