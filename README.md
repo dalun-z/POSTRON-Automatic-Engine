@@ -32,4 +32,12 @@
     - should be able to see the version of `adb`
 - IDE (eclipse, Intellij)
 - Selenium & appium libraies (maven)
-- Connect 
+- Connect Android device to PC
+    - [start developer mode on Android device](https://www.digitaltrends.com/mobile/how-to-get-developer-options-on-android/#:~:text=Android%20Enable%20Developer%20Options%201%20If%20using%20stock,the%20very%20bottom%20of%20the%20menu.%20See%20More.)
+    - use usb cable connect Android device to PC
+    - run `adb devices` on cmd to check if the device connected successfully(should see the serial number of the connected Android device)
+    - [Detailed steps to connect Android device through IP address](https://www.makeuseof.com/use-adb-over-wifi-android/)
+        - Get the IP address of your android device
+        - run `adb tcpip 5555`
+        - run `adb connect 192.168.1.132`
+- Run appium server before you run the test code 
