@@ -4,7 +4,7 @@
 - Language: Java
 - JDK: jdk-20
 - JRE: JavaSE-20
-- Tool: Eclipse, appium, adb, node.js(latest), npm(latest)
+- Tool: Eclipse, appium, adb, node.js(latest), npm(latest), [apk-info](https://www.virustotal.com/gui/home/upload)
 
 ### Setup Environment (Windows)
 - Setup `node.js` & `npm` environment
@@ -35,3 +35,8 @@
         - run `adb connect 192.168.1.132` (the ip address you got from Android device)
         - now you can disconnect the usb cable and remotely connect to the android device
 - Run appium server before you run the test code 
+
+### Run Test (Windows)
+- open `C:\Users\DalunZhang\AppData\Local\Android\Sdk\tools\bin\uiautomatorviewer` to capture the elemenets of the app
+- run `appium` on cmd to start appium server
+- go to `PostronTest.java` right click the screen `Run as: Java Application`
