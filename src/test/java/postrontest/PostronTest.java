@@ -1,20 +1,22 @@
 package postrontest;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
 import io.appium.java_client.android.AndroidDriver;
 
 
 public class PostronTest {
 	
-	static AndroidDriver driver;
+	public static AndroidDriver driver;
 
 	public static void main(String[] args) {
 		try {
 			RunPOSTRON();
-			TestDineIn.DineIn();
 		} catch (Exception e) {
 			System.out.println(e.getCause());
 			System.out.println(e.getMessage());
@@ -41,10 +43,26 @@ public class PostronTest {
 		URL url = new URL("http://127.0.0.1:4723");		// server IP address
 		driver = new AndroidDriver(url, cap);
 		
-//		driver.findElement(By.name("CONFIRM")).click();
-		
-		
 		System.out.println("Application Started Successfully...");
+		
+		// click all the permission buttons
+		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
+		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
+		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
+		
+		// important to wait 1-2 second for DOM response to capture button from the app
+		TimeUnit.SECONDS.sleep(2);
+		
+		WebElement confirmButton = driver.findElement(By.id("android:id/button1"));
+		confirmButton.click();
+		
+		TimeUnit.SECONDS.sleep(2);
+		System.out.println("Launch App Process Finished ...");
 	}
-
+	
+//	public static void CashierLogin() {
+//		try {
+//			driver.findElement(By.id(""))
+//		}
+//	}
 }
