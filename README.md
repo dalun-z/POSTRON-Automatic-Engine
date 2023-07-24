@@ -37,6 +37,14 @@
 - Run appium server before you run the test code 
 
 ### Run Test (Windows)
+- Check if the device is connected `adb devices`
+    - if not, run the below command
+    ```
+    adb tcpip 5555
+    adb connect 192.168.1.116:5555
+    adb devices
+    ```
+- if appium server down, run `adb kill-server` then `adb start-server`
 - open `C:\Users\DalunZhang\AppData\Local\Android\Sdk\tools\bin\uiautomatorviewer` to capture the elemenets of the app
 - run `appium` on cmd to start appium server
 - go to `PostronTest.java` right click the screen `Run as: Java Application`
