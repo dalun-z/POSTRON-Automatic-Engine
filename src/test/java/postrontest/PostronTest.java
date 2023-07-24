@@ -17,12 +17,34 @@ public class PostronTest {
 	public static WebElement Numbtn(char num) {
 		return driver.findElement(By.id("com.postron.smartPOS:id/btn_num"+num));
 	}
+	
+	
 
+	public static void AdminPIN() {
+		Numbtn('1').click();
+		Numbtn('2').click();
+		Numbtn('3').click();
+		Numbtn('4').click();
+	}
+	
+	public static void EmployeePIN() {
+		Numbtn('4').click();
+		Numbtn('3').click();
+		Numbtn('2').click();
+		Numbtn('1').click();
+	}
+	
+	
+	public static void Sleep(int n) throws InterruptedException {
+		TimeUnit.SECONDS.sleep(n);
+	}
+	
 	public static void main(String[] args) {
 		try {
 			RunPOSTRON();
 			CashierLogin();
-			EnterCashBalance();
+//			EnterCashBalance();
+			DineIn();
 		} catch (Exception e) {
 			System.out.println(e.getCause());
 			System.out.println(e.getMessage());
@@ -57,42 +79,67 @@ public class PostronTest {
 		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
 		
 		// important to wait 1-2 second for DOM response to capture button from the app
-		TimeUnit.SECONDS.sleep(2);
+		Sleep(2);
 		
 		WebElement confirmButton = driver.findElement(By.id("android:id/button1"));
 		confirmButton.click();
-		
+		Sleep(30);
 		System.out.println("Launch App Process Finished ...");
 	}
 	
 	public static void CashierLogin() {
-		try {
-			TimeUnit.SECONDS.sleep(25);
-			
-			WebElement btn1 = driver.findElement(By.xpath("//android.widget.TextView[@text='Cashier-In']"));
-			btn1.click();
-			
-			WebElement pin1 = driver.findElement(By.id("com.postron.smartPOS:id/btn_num1"));
-			WebElement pin2 = driver.findElement(By.id("com.postron.smartPOS:id/btn_num2"));
-			WebElement pin3 = driver.findElement(By.id("com.postron.smartPOS:id/btn_num3"));
-			WebElement pin4 = driver.findElement(By.id("com.postron.smartPOS:id/btn_num4"));
-			pin1.click();
-			pin2.click();
-			pin3.click();
-			pin4.click();
-			
-			WebElement loginbtn = driver.findElement(By.id("com.postron.smartPOS:id/btn_login"));
-			loginbtn.click();
-			
-			System.out.println("Cashier Logged In using PIN : 1234");
-		} catch (Exception e) {
-			e.printStackTrace();
+		
+		if (driver.findElement(By.id("com.postron.smartPOS:id/txt_cashier")).getText().equals("No cashier")) {
+			try {
+				Sleep(1);
+				
+				WebElement btn1 = driver.findElement(By.xpath("//android.widget.TextView[@text='Cashier-In']"));
+				btn1.click();
+				
+				// 1234
+				AdminPIN();
+				
+				WebElement loginbtn = driver.findElement(By.id("com.postron.smartPOS:id/btn_login"));
+				loginbtn.click();
+				
+				System.out.println("Cashier Logged In using PIN : 1234");
+				
+				Sleep(1);
+				EnterCashBalance();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Cashier already logged in!");
+		}
+	}
+	
+	public static void DineIn() throws InterruptedException {
+		Sleep(1);
+		driver.findElement(By.xpath("//android.widget.TextView[@text='Dine In']")).click();
+		Sleep(1);
+		
+		if (driver.findElement(By.id("com.postron.smartPOS:id/btn_login")).isDisplayed()) {
+			AdminPIN();
+			driver.findElement(By.id("com.postron.smartPOS:id/btn_login")).click();
+			Sleep(2);
+			System.out.println("User Logged In!");
+		} else {
+			System.out.println("User Already Logged In!");
 		}
 	}
 	
 	public static void EnterCashBalance() {
 		try {
+			Sleep(2);
 			Numbtn('2').click();
+			Numbtn('0').click();
+			Numbtn('0').click();
+			Numbtn('0').click();
+			Numbtn('0').click();
+			driver.findElement(By.id("com.postron.smartPOS:id/btn_submit")).click();
+			
+			System.out.println("Cash Balance Entered : $200.00");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

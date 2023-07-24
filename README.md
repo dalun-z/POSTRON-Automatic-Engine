@@ -41,7 +41,7 @@
     - if not, run the below command
     ```
     adb tcpip 5555
-    adb connect 192.168.1.116:5555
+    adb connect 192.168.1.116
     adb devices
     ```
 - if appium server down, run `adb kill-server` then `adb start-server`
