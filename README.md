@@ -50,3 +50,9 @@
 - open `C:\Users\DalunZhang\AppData\Local\Android\Sdk\tools\bin\uiautomatorviewer` to capture the elemenets of the app
 - run `appium` on cmd to start appium server
 - go to `PostronTest.java` right click the screen `Run as: Java Application`
+
+### Code (Java)
+- When looking for a element before the screen is fully loaded. Use `findElements` instead of `findElement`
+    - Usage: `Boolean isPresent = driver.findElements(By.yourLocator).size() > 0`
+    - [Source](https://sqa.stackexchange.com/questions/14190/how-to-continue-script-when-element-is-not-found-in-selenium)
+    - Or use `NoSuchElementException`

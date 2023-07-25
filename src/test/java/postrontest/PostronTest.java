@@ -304,6 +304,12 @@ public class PostronTest {
 		Numbtn('2').click();
 	}
 	
+	public static void EnterNumber(String s) {
+		for(int i = 0; i < s.length(); i++) {
+			Numbtn(s.charAt(i)).click();
+		}
+	}
+	
 	public static void Sleep(int n) throws InterruptedException {
 		TimeUnit.SECONDS.sleep(n);
 	}
