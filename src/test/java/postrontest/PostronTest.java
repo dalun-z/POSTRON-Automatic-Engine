@@ -7,8 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 
 public class PostronTest {
@@ -21,6 +22,8 @@ public class PostronTest {
 			CashierLogin();
 //			EnterCashBalance();
 			DineIn();
+			SelectTable();
+			MenuTest();
 		} catch (Exception e) {
 			System.out.println(e.getCause());
 			System.out.println(e.getMessage());
@@ -47,8 +50,6 @@ public class PostronTest {
 		URL url = new URL("http://127.0.0.1:4723");		// server IP address
 		driver = new AndroidDriver(url, cap);
 		
-		System.out.println("Application Started Successfully...");
-		
 		// click all the permission buttons
 		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
 		driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
@@ -57,16 +58,11 @@ public class PostronTest {
 		// important to wait 1-2 second for DOM response to capture button from the app
 		Sleep(2);
 		
-		WebElement confirmButton = driver.findElement(By.id("android:id/button1"));
-		confirmButton.click();
+		// Cancel
+		CancelSync();
 		
-		for(int i = 0; i < 2; i++) {
-			System.out.println("Main Screen Loading...");
-			Sleep(56);
-			System.out.print("...");
-			driver.getStatus();
-			System.out.println(driver.currentActivity());	// important for keeping the driver time out
-		}
+		// Confirm
+//		ConfirmSync();
 		
 		System.out.println("Launch App Process Finished ...");
 	}
@@ -121,6 +117,156 @@ public class PostronTest {
 		}
 	}
 	
+	public static void MenuTest() {
+		try {
+			Sleep(1);
+			SelectCategory("Dim Sum");
+			
+			Sleep(1);
+			SelectDishes();
+			
+			Sleep(1);
+			TagTab();
+			
+			Sleep(1);
+			DiscountTab();
+			
+			Sleep(1);
+			ComboTab();
+			
+			Sleep(1);
+			SearchTab();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void SearchTab() throws InterruptedException {
+		System.out.println("Start Search Feature Testing...");
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabSearch")).click();
+		Sleep(1);
+		
+		driver.pressKey(new KeyEvent(AndroidKey.DIGIT_9));
+		driver.pressKey(new KeyEvent(AndroidKey.DIGIT_5));
+		
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_search")).click();
+		driver.findElement(By.xpath("//android.widget.TextView[@text='95 Cara EggTart']")).click();
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_confirm")).click();
+		Sleep(2);
+		
+		System.out.println("Search Test Passed!");
+	}
+	
+	public static void ComboTab() throws InterruptedException {
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabCombo")).click();
+		Sleep(1);
+		
+		driver.findElement(By.xpath("//android.widget.TextView[@text='Test On Click /w modifier and spec pop']")).click();
+		Sleep(1);
+		
+		// Garlic Cucumber Modifier
+		// price
+		Numbtn('1').click();
+		Numbtn('2').click();
+		Numbtn('4').click();
+		Numbtn('9').click();
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(2);
+		
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(1);
+		
+		// 牛肉 Modifier
+		driver.findElement(By.xpath("//android.widget.TextView[@text='牛肉']")).click();
+		driver.findElement(By.xpath("//android.widget.TextView[@text='Add']")).click();
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_confirm")).click();
+		Sleep(2);
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(1);
+		
+		
+		// 醉翁蝦 Modifier
+		// price
+		Numbtn('2').click();
+		Numbtn('2').click();
+		Numbtn('9').click();
+		Numbtn('9').click();
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(1);
+		// lbs
+		Numbtn('1').click();
+		Numbtn('0').click();
+		Numbtn('0').click();
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(2);
+		
+		driver.findElement(By.xpath("//android.widget.TextView[@text='Garlic Steamed']")).click();
+		driver.findElement(By.xpath("//android.widget.TextView[@text='醉翁蝦']")).click();
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_confirm")).click();
+		Sleep(2);
+		
+		// Island Fish Modifier
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(1);
+		// price
+		Numbtn('9').click();
+		Numbtn('9').click();
+		Numbtn('9').click();
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(1);
+		// lbs
+		Numbtn('1').click();
+		Numbtn('5').click();
+		Numbtn('0').click();
+		driver.findElement(By.id("android:id/button1")).click();
+		Sleep(1);
+		
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_confirm")).click();
+		Sleep(1);
+		
+		System.out.println("Combo Tab Test Passed.");
+	}
+	
+	public static void DiscountTab() {
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabDiscount")).click();
+		System.out.println("Discount Tab Test Passed.");
+	}
+	
+	public static void TagTab() throws InterruptedException {
+		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabTag")).click();
+		Sleep(1);
+		SelectTab("普通飲料");
+		Sleep(1);
+		driver.findElement(By.xpath("//android.widget.TextView[@text='ICE TEA']")).click();
+		System.out.println("Tag Tab Testing Passed.");
+	}
+	
+	public static void SelectTab(String tab) {
+		driver.findElement(By.xpath("//android.widget.TextView[@text='" + tab +"']")).click();
+	}
+	
+	public static void SelectCategory(String category) {
+		driver.findElement(By.xpath("//android.widget.TextView[@text='" + category + "']")).click();
+		System.out.println("Selected '" + category + "' Category.");
+	}
+	
+	public static void SelectDishes() {
+		driver.findElement(By.xpath("//android.widget.TextView[@text='91 Sf/Gin dumpling']")).click();
+		driver.findElement(By.xpath("//android.widget.TextView[@text='BBQ Pk Puff']")).click();
+		System.out.println("Selected 2 dishes.");
+	}
+	
+	// Selecting A5 table for testing
+	public static void SelectTable() {
+		try {
+			Sleep(2);
+			driver.findElement(By.xpath("//android.widget.TextView[@text='A 5']")).click();
+			Sleep(2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void EnterCashBalance() {
 		try {
 			Sleep(2);
@@ -157,6 +303,27 @@ public class PostronTest {
 	
 	public static void Sleep(int n) throws InterruptedException {
 		TimeUnit.SECONDS.sleep(n);
+	}
+	
+	public static void CancelSync() throws InterruptedException {
+		driver.findElement(By.id("android:id/button2")).click();
+		System.out.println("Application Started Successfully...");
+		Sleep(5);
+	}
+	
+	public static void ConfirmSync() throws InterruptedException {
+		WebElement confirmButton = driver.findElement(By.id("android:id/button1"));
+		confirmButton.click();
+		
+		System.out.println("Application Started Successfully...");
+		
+		for(int i = 0; i < 2; i++) {
+			System.out.println("Main Screen Loading...");
+			Sleep(56);
+			System.out.print("...");
+			driver.getStatus();
+			System.out.println(driver.currentActivity());	// important for keeping the driver time out
+		}
 	}
 	
 }
