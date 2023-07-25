@@ -142,7 +142,7 @@ public class PostronTest {
 	}
 	
 	public static void SearchTab() throws InterruptedException {
-		System.out.println("Start Search Feature Testing...");
+		System.out.println("Start Search Feature Test...");
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabSearch")).click();
 		Sleep(1);
 		
@@ -158,6 +158,7 @@ public class PostronTest {
 	}
 	
 	public static void ComboTab() throws InterruptedException {
+		System.out.println("Start Combo Feature Test...");
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabCombo")).click();
 		Sleep(1);
 		
@@ -228,11 +229,13 @@ public class PostronTest {
 	}
 	
 	public static void DiscountTab() {
+		System.out.println("Start Discount Feature Test...");
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabDiscount")).click();
 		System.out.println("Discount Tab Test Passed.");
 	}
 	
 	public static void TagTab() throws InterruptedException {
+		System.out.println("Start Tag Feature Test...");
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_tabTag")).click();
 		Sleep(1);
 		SelectTab("普通飲料");
