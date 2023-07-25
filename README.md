@@ -40,6 +40,8 @@
 - Check if the device is connected `adb devices`
     - if not, run the below command
     ```
+    adb kill-server
+    adb start-server
     adb tcpip 5555
     adb connect 192.168.1.116
     adb devices

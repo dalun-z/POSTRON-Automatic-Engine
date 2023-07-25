@@ -7,37 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+
 import io.appium.java_client.android.AndroidDriver;
 
 
 public class PostronTest {
 	
 	public static AndroidDriver driver;
-	
-	public static WebElement Numbtn(char num) {
-		return driver.findElement(By.id("com.postron.smartPOS:id/btn_num"+num));
-	}
-	
-	
-
-	public static void AdminPIN() {
-		Numbtn('1').click();
-		Numbtn('2').click();
-		Numbtn('3').click();
-		Numbtn('4').click();
-	}
-	
-	public static void EmployeePIN() {
-		Numbtn('4').click();
-		Numbtn('3').click();
-		Numbtn('2').click();
-		Numbtn('1').click();
-	}
-	
-	
-	public static void Sleep(int n) throws InterruptedException {
-		TimeUnit.SECONDS.sleep(n);
-	}
 	
 	public static void main(String[] args) {
 		try {
@@ -63,7 +39,7 @@ public class PostronTest {
 		cap.setCapability("platformName", "Android");
 		cap.setCapability("platformVersion", "11");
 		cap.setCapability("automationName", "UIAutomator2");
-		
+		cap.setCapability("new CommandTimeout", 300);
 		// APK info
 		cap.setCapability("appPackage", "com.postron.smartPOS");
 		cap.setCapability("appActivity", "tech.bigbug.postron.mobile.view.activity.StartupActivity");
@@ -83,7 +59,15 @@ public class PostronTest {
 		
 		WebElement confirmButton = driver.findElement(By.id("android:id/button1"));
 		confirmButton.click();
-		Sleep(30);
+		
+		for(int i = 0; i < 2; i++) {
+			System.out.println("Main Screen Loading...");
+			Sleep(56);
+			System.out.print("...");
+			driver.getStatus();
+			System.out.println(driver.currentActivity());	// important for keeping the driver time out
+		}
+		
 		System.out.println("Launch App Process Finished ...");
 	}
 	
@@ -115,17 +99,25 @@ public class PostronTest {
 	}
 	
 	public static void DineIn() throws InterruptedException {
-		Sleep(1);
-		driver.findElement(By.xpath("//android.widget.TextView[@text='Dine In']")).click();
-		Sleep(1);
 		
-		if (driver.findElement(By.id("com.postron.smartPOS:id/btn_login")).isDisplayed()) {
-			AdminPIN();
-			driver.findElement(By.id("com.postron.smartPOS:id/btn_login")).click();
-			Sleep(2);
-			System.out.println("User Logged In!");
-		} else {
-			System.out.println("User Already Logged In!");
+		try {
+			Sleep(1);
+			if (driver.findElement(By.id("com.postron.smartPOS:id/txt_loginUser")).getText().equals("No login")) {
+				Sleep(1);
+				driver.findElement(By.xpath("//android.widget.TextView[@text='Dine In']")).click();
+				Sleep(2);
+				AdminPIN();
+				driver.findElement(By.id("com.postron.smartPOS:id/btn_login")).click();
+				Sleep(2);
+				System.out.println("User Logged In!");
+			} else {
+				Sleep(1);
+				driver.findElement(By.xpath("//android.widget.TextView[@text='Dine In']")).click();
+				Sleep(1);
+				System.out.println("User Already Logged In!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -144,4 +136,27 @@ public class PostronTest {
 			e.printStackTrace();
 		}
 	}
+	
+	public static WebElement Numbtn(char num) {
+		return driver.findElement(By.id("com.postron.smartPOS:id/btn_num"+num));
+	}
+
+	public static void AdminPIN() {
+		Numbtn('1').click();
+		Numbtn('2').click();
+		Numbtn('3').click();
+		Numbtn('4').click();
+	}
+	
+	public static void EmployeePIN() {
+		Numbtn('2').click();
+		Numbtn('2').click();
+		Numbtn('2').click();
+		Numbtn('2').click();
+	}
+	
+	public static void Sleep(int n) throws InterruptedException {
+		TimeUnit.SECONDS.sleep(n);
+	}
+	
 }
