@@ -35,6 +35,7 @@ public class SingletonAndroidDriver {
 			cap.setCapability("appPackage", "com.postron.smartPOS");
 			cap.setCapability("appActivity", "tech.bigbug.postron.mobile.view.activity.StartupActivity");
 			
+			@SuppressWarnings("deprecation")
 			URL url = new URL("http://127.0.0.1:4723");		// server IP address
 			driver = new AndroidDriver(url, cap);
 			
