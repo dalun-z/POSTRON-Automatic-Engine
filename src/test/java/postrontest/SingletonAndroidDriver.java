@@ -39,6 +39,7 @@ public class SingletonAndroidDriver {
 			URL url = new URL("http://127.0.0.1:4723");		// server IP address
 			driver = new AndroidDriver(url, cap);
 			
+			
 			// click all the permission buttons
 			driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
 			driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
@@ -47,10 +48,10 @@ public class SingletonAndroidDriver {
 			// important to wait 1-2 second for DOM response to capture button from the app
 			TestScenarios.Sleep(2);
 			
-			// Cancel
+			// Cancel Sync
 			TestScenarios.CancelSync();
 			
-			// Confirm
+			// Confirm Sync
 //			TestScenarios.ConfirmSync();
 			
 			System.out.println("Launch App Process Finished ...");

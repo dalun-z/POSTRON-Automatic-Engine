@@ -68,7 +68,6 @@ public class TestScenarios {
 			Sleep(1);
 			SelectCategory("Dim Sum");
 			
-			
 			Sleep(1);
 			SelectDishes();
 			
@@ -113,11 +112,8 @@ public class TestScenarios {
 		Sleep(1);
 		
 		// Garlic Cucumber Modifier
-		// price
-		Numbtn('1').click();
-		Numbtn('2').click();
-		Numbtn('4').click();
-		Numbtn('9').click();
+		// price $12.49
+		EnterNumber("1249");
 		driver.findElement(By.id("android:id/button1")).click();
 		Sleep(2);
 		
@@ -134,17 +130,12 @@ public class TestScenarios {
 		
 		
 		// 醉翁蝦 Modifier
-		// price
-		Numbtn('2').click();
-		Numbtn('2').click();
-		Numbtn('9').click();
-		Numbtn('9').click();
+		// price $22.99
+		EnterNumber("2299");
 		driver.findElement(By.id("android:id/button1")).click();
 		Sleep(1);
-		// lbs
-		Numbtn('1').click();
-		Numbtn('0').click();
-		Numbtn('0').click();
+		// lbs 1.00
+		EnterNumber("100");
 		driver.findElement(By.id("android:id/button1")).click();
 		Sleep(2);
 		
@@ -156,16 +147,12 @@ public class TestScenarios {
 		// Island Fish Modifier
 		driver.findElement(By.id("android:id/button1")).click();
 		Sleep(1);
-		// price
-		Numbtn('9').click();
-		Numbtn('9').click();
-		Numbtn('9').click();
+		// price $9.99
+		EnterNumber("999");
 		driver.findElement(By.id("android:id/button1")).click();
 		Sleep(1);
-		// lbs
-		Numbtn('1').click();
-		Numbtn('5').click();
-		Numbtn('0').click();
+		// lbs 1.50
+		EnterNumber("150");
 		driver.findElement(By.id("android:id/button1")).click();
 		Sleep(1);
 		
