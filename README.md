@@ -36,6 +36,10 @@
         - now you can disconnect the usb cable and remotely connect to the android device
 - Run appium server before you run the test code 
 
+### Hardware (Android)
+- On T2 or Andorid 11, look for `Build Number` to enable `developer mode`
+- on T2s or Android 9, look for `OS Version` to enable `developer mode`
+
 ### Run Test (Windows)
 - Check if the device is connected `adb devices`
     - if not, run the below command
