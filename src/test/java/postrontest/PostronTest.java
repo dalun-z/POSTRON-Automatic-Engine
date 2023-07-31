@@ -11,7 +11,7 @@ public class PostronTest {
 			
 			TestScenarios.CashierLogin();
 			TestScenarios.DineIn();
-			TestScenarios.SearchTab();
+			TestScenarios.SelectTable();
 			TestScenarios.MenuTest();
 		} catch (Exception e) {
 			System.out.println(e.getCause());

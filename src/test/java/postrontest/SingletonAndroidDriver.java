@@ -26,7 +26,7 @@ public class SingletonAndroidDriver {
 			
 			// Device info
 			cap.setCapability("deviceName", "D4-503");
-			cap.setCapability("udid", "192.168.1.116:5555");	// device id # or it could be the device IP address
+			cap.setCapability("udid", "192.168.1.128:5555");	// device id # or it could be the device IP address
 			cap.setCapability("platformName", "Android");
 			cap.setCapability("platformVersion", "11");
 			cap.setCapability("automationName", "UIAutomator2");

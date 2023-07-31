@@ -39,7 +39,7 @@ public class TestScenarios {
 				System.out.println("Cashier already logged in!");
 			}
 	}
-	
+
 	public static void DineIn() throws InterruptedException {
 		
 		try {
@@ -97,6 +97,7 @@ public class TestScenarios {
 		
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_search")).click();
 		driver.findElement(By.xpath("//android.widget.TextView[@text='95 Cara EggTart']")).click();
+		Sleep(1);
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_confirm")).click();
 		Sleep(2);
 		
@@ -209,7 +210,7 @@ public class TestScenarios {
 			Sleep(2);
 			EnterNumber("20000");
 			driver.findElement(By.id("com.postron.smartPOS:id/btn_submit")).click();
-			
+			Sleep(2);
 			System.out.println("Cash Balance Entered : $200.00");
 		} catch (Exception e) {
 			e.printStackTrace();
