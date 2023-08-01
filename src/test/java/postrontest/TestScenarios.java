@@ -3,6 +3,7 @@ package postrontest;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -13,6 +14,41 @@ public class TestScenarios {
 	
 	private static AndroidDriver driver = AndroidDriverFactory.getDriverInstance();
 	
+	public static void FeatureTest() throws InterruptedException {
+		Sleep(2);
+		NoTax();
+		
+		Sleep(1);
+		NoPrint();
+		
+		Sleep(1);
+		Dimension a = driver.manage().window().getSize();
+		
+	}
+	
+	public static void NoPrint() throws InterruptedException {
+		driver.findElement(By.xpath("//android.widget.TextView[@text='No Print']")).click();
+		Sleep(1);
+	}
+	
+	public static void NoTax() throws InterruptedException {
+		driver.findElement(By.xpath("//android.widget.TextView[@text='No Tax']")).click();
+		
+		Sleep(1);
+		
+		double totalPrice = Double.parseDouble(driver.findElement(By.id("com.postron.smartPOS:id/txt_totalPrice")).getText());
+		double surcharge = Double.parseDouble(driver.findElement(By.id("com.postron.smartPOS:id/txt_surchargePrice")).getText());
+		double orderPrice = Double.parseDouble(driver.findElement(By.id("com.postron.smartPOS:id/txt_orderPrice")).getText());
+		
+		if (totalPrice == surcharge + orderPrice) {
+			System.out.println("No Tax Test Passed..");
+		} else {
+			System.out.println("No Tax features has some errors exists!");
+		}
+		
+		Sleep(1);
+	}
+
 	public static void CashierLogin() {
 			
 			if (driver.findElement(By.id("com.postron.smartPOS:id/txt_cashier")).getText().equals("No cashier")) {
@@ -63,14 +99,18 @@ public class TestScenarios {
 		}
 	}
 	
+	public static void SelectTestDishes() throws InterruptedException {
+		Sleep(1);
+		SelectCategory("Dim Sum");
+		
+		Sleep(1);
+		SelectDishes();
+		
+		Sleep(1);
+	}
+	
 	public static void MenuTest() {
 		try {
-			Sleep(1);
-			SelectCategory("Dim Sum");
-			
-			Sleep(1);
-			SelectDishes();
-			
 			Sleep(1);
 			TagTab();
 			
@@ -96,6 +136,7 @@ public class TestScenarios {
 		driver.pressKey(new KeyEvent(AndroidKey.DIGIT_5));
 		
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_search")).click();
+		Sleep(1);
 		driver.findElement(By.xpath("//android.widget.TextView[@text='95 Cara EggTart']")).click();
 		Sleep(1);
 		driver.findElement(By.id("com.postron.smartPOS:id/btn_confirm")).click();
