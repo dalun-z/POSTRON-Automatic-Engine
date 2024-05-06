@@ -53,10 +53,11 @@
 ### UI Automator Viewer Config
 ```
 .\adb devices						// Check if device is connected
-.\adb shell						// Enter Android shell
 .\adb shell uiautomator dump /android/local/storage	// Save the .xml file to the Android device
 .\adb pull /android/local/storage /my/pc/storage	// Retrieve the .xml file from Android to PC
 ```
+
+`.\adb shell` to enter the Android device shell to check stuff using shell command
 
 ### Run Test (Windows)
 - Check if the device is connected `adb devices`
