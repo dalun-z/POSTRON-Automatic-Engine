@@ -46,18 +46,19 @@
 - Select 'Pair device with pariring code'
 - On powershell under 'platform-tools' folder. (shift-right click on the foloder and select powershell)
 - In powershell, key in `.\adb pair 192.168.0.123:88888			// <ip address>:<port number>` 
-- Then enter the pairing code from Android deivce
+- Then enter the pairing code
 - Then in powershell, key in `.\adb connect 192.168.1.123:68688		// <ip address>:<port number>` 
 - There should be a desktop device shows on the Android wireless debugging page if succeed
 
 ### UI Automator Viewer Config
+This process generate a .xml file contains all the elements and object of the current app interface
 ```
 .\adb devices						// Check if device is connected
-.\adb shell uiautomator dump /android/local/storage	// Save the .xml file to the Android device
-.\adb pull /android/local/storage /my/pc/storage	// Retrieve the .xml file from Android to PC
+.\adb shell uiautomator dump /path/to/Android/local	// Save the .xml file to the Android device
+.\adb pull /Path/to/Android/local /Path/to/my/pc	// Retrieve the .xml file from Android to PC
 ```
 
-`.\adb shell` to enter the Android device shell to check stuff using shell command
+`.\adb shell` to enter the Android device shell to check pwd or stuff using shell command
 
 ### Run Test (Windows)
 - Check if the device is connected `adb devices`
