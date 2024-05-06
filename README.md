@@ -40,6 +40,24 @@
 - On T2 or Andorid 11, look for `Build Number` to enable `developer mode`
 - on T2s or Android 9, look for `OS Version` to enable `developer mode`
 
+### Setup ADB Wireless Connection
+- On Android device, activate & enter 'Developer Mode'
+- Open the 'Wireless Debugging'
+- Select 'Pair device with pariring code'
+- On powershell under 'platform-tools' folder. (shift-right click on the foloder and select powershell)
+- In powershell, key in `.\adb pair 192.168.0.123:88888` (<ip address>:<port number>)
+- Then enter the pairing code from Android deivce
+- Then in powershell, key in `.\adb connect 192.168.1.123:68688` (<ip address>:<port number>)
+- There should be a desktop device shows on the Android wireless debugging page if succeed
+
+### UI Automator Viewer Config
+```
+.\adb devices						// Check if device is connected
+.\adb shell						// Enter Android shell
+.\adb shell uiautomator dump /android/local/storage	// Save the .xml file to the Android device
+.\adb pull /android/local/storage /my/pc/storage	// Retrieve the .xml file from Android to PC
+```
+
 ### Run Test (Windows)
 - Check if the device is connected `adb devices`
     - if not, run the below command
