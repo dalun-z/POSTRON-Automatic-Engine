@@ -60,3 +60,10 @@
     - Usage: `Boolean isPresent = driver.findElements(By.yourLocator).size() > 0`
     - [Source](https://sqa.stackexchange.com/questions/14190/how-to-continue-script-when-element-is-not-found-in-selenium)
     - Or use `NoSuchElementException`
+    - Implicit Waits: Implicit waits tell Appium to wait for a certain amount of time before throwing a NoSuchElementException if the element is not found immediately. This can be set globally for your entire test session.
+`driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);`
+    - Explicit Waits: Explicit waits allow you to wait for a certain condition to occur before proceeding further in the code. This is more flexible than implicit waits because you can wait for specific conditions.
+```
+WebDriverWait wait = new WebDriverWait(driver, 10);
+WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("elementId")));
+```
