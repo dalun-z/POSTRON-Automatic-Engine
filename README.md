@@ -45,9 +45,9 @@
 - Open the 'Wireless Debugging'
 - Select 'Pair device with pariring code'
 - On powershell under 'platform-tools' folder. (shift-right click on the foloder and select powershell)
-- In powershell, key in `.\adb pair 192.168.0.123:88888` (<ip address>:<port number>)
+- In powershell, key in `.\adb pair 192.168.0.123:88888` <ip address>:<port number>
 - Then enter the pairing code from Android deivce
-- Then in powershell, key in `.\adb connect 192.168.1.123:68688` (<ip address>:<port number>)
+- Then in powershell, key in `.\adb connect 192.168.1.123:68688` <ip address>:<port number>
 - There should be a desktop device shows on the Android wireless debugging page if succeed
 
 ### UI Automator Viewer Config
